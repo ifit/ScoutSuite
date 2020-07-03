@@ -10,6 +10,8 @@ import sys
 from ScoutSuite.__main__ import run_from_cli
 
 
+# This function was based on an example found here: https://github.com/boto/boto3/issues/358
+# It was modified to determine mime type and set Content-Type HTTP metadata automatically.
 def upload_directory(directory, bucket, prefix):
     mime = MimeTypes()
     s3 = boto3.client("s3")
