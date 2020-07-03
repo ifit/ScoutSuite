@@ -26,3 +26,4 @@ See corresponding CloudFormation template for ECR repository information
   * Add ability to push output report to a parameterized S3 bucket (pulled from env var)
   * Set mime types on objects pushed to S3
   * Prefix report keys with current date for report grouping
+  * Delete .travis.yml
