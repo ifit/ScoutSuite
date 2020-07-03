@@ -11,6 +11,7 @@ from ScoutSuite.__main__ import run_from_cli
 
 
 def upload_directory(directory, bucket, prefix):
+    mime = MimeTypes()
     s3 = boto3.client("s3")
 
     def error(e):
@@ -22,7 +23,12 @@ def upload_directory(directory, bucket, prefix):
                 yield os.path.join(root, f)
 
     def upload_file(filename):
-        s3.upload_file(Filename=filename, Bucket=bucket, Key=prefix + "/" + os.path.relpath(filename, directory))
+        mime_type = mime.guess_type(filename)
+        if mime_type[0] is not None:
+            extra_args={'ContentType':mime_type[0]}
+        else:
+            extra_args={}
+        s3.upload_file(Filename=filename, Bucket=bucket, Key=prefix + "/" + os.path.relpath(filename, directory), ExtraArgs=extra_args)
 
     with futures.ThreadPoolExecutor() as executor:
         futures.wait(
