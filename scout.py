@@ -22,7 +22,7 @@ def upload_directory(directory, bucket, prefix):
                 yield os.path.join(root, f)
 
     def upload_file(filename):
-        s3.upload_file(Filename=filename, Bucket=bucket, Key=prefix + os.path.relpath(filename, directory))
+        s3.upload_file(Filename=filename, Bucket=bucket, Key=prefix + os.path.relpath(filename, directory), ExtraArgs={'ContentType':'text/html'})
 
     with futures.ThreadPoolExecutor() as executor:
         futures.wait(
