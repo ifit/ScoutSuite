@@ -40,4 +40,7 @@ def upload_directory(directory, bucket, prefix):
 if __name__ == "__main__":
     run_from_cli()
 
-    sys.exit(upload_directory("/opt/scoutsuite-report", "ifit-scout-suite", prefix))
+    output_bucket = os.environ.get("OUTPUT_BUCKET")
+    prefix = date.today().isoformat()
+
+    sys.exit(upload_directory("/opt/scoutsuite-report", output_bucket, prefix))
