@@ -1,6 +1,6 @@
 exceptions =
 {
-    "elb": {
+  "elb": {
         "elb-listener-allowing-cleartext": [
             "elb.regions.us-east-1.vpcs.vpc-c51788a1.elbs.e5eb87a04a9a1225188f56939a73d2e78232e8db.listeners.80",
             "elb.regions.us-east-1.vpcs.vpc-c51788a1.elbs.e29baca49135c16472dbf02692e9d1c882e1c803.listeners.80",
@@ -24,5 +24,16 @@ exceptions =
             "elb.regions.us-east-1.vpcs.vpc-9f5eb5fb.elbs.d02ea55140419057fb1f8afdad11269f04d81c68.listeners.80",
             "elb.regions.us-east-1.vpcs.vpc-9f5eb5fb.elbs.955c46f239ec065ce60800034c8ed6f042f2eb59.listeners.80"
         ]
+    },
+    "elbv2": {
+        "elbv2-listener-allowing-cleartext": [
+            "elbv2.regions.us-east-1.vpcs.vpc-c51788a1.lbs.f685f94d29fee4378da8ab0931ad74b5191b5360.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-c51788a1.lbs.1d11d41f105a282009479e7fbe22108a63a933f8.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-c51788a1.lbs.892e088812fce019ecd20bdfba480c5aad5ff884.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-c51788a1.lbs.b838305da3dfc49389bc4262cb00fd583a6d2579.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-d40c0bad.lbs.02cf2e3c571ec143eb939286d9a2414eda527a8f.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-d40c0bad.lbs.5cd2b5ea5ac9f9ff6dd0787cecc275b5a00b7ad3.listeners.80.Protocol",
+            "elbv2.regions.us-east-1.vpcs.vpc-9f5eb5fb.lbs.54cb42fe3aef4149cf6b088d55e4459257865281.listeners.80.Protocol"
+          ]
     }
 }
