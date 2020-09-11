@@ -6,7 +6,13 @@ See corresponding CloudFormation template for ECR repository information
 
 ## Deployments
 
-Github Actions build and push docker images to ECR for every PR/Push to the `master` branch via the [`Deploy ScoutSuite Docker Image to ECR`](../.ScoutSuite/.github/workflows/deploy.yml) workflow using a dedicated [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users) with [least priveledge granted](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) and keeping AWS Access Keys stored as [GitHub Actions secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+Github Actions build, tag (short `sha1` && `latest`), and push docker images to ECR for every PR/Push to the `master` branch via the [`Deploy ScoutSuite Docker Image to ECR`](../.ScoutSuite/.github/workflows/deploy.yml) workflow using a dedicated [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users) with [least priveledge granted](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) and keeping AWS Access Keys stored as [GitHub Actions secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+
+The ECR LifecyclePolicy for the ScouteSuite Repo only retains 3 docker images. Each time the task runs the `lastest` image will be used.
+
+### RollingBack
+
+To rollback a bad deploy/broken image you can delete the defective image, and ensure that the image in the rpo you wish to be used is tagged as `latest`.
 
 ## Manual Build Steps
 
