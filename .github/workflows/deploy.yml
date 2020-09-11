@@ -10,6 +10,8 @@ on:
 jobs:
   build_and_push:
     name: Build and Push Docker Images to ECR
+    runs-on: ubuntu-16.04
+
     steps:
       - name: Git Checkout
         uses: actions/checkout@v2
