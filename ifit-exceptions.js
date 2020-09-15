@@ -1,5 +1,10 @@
 exceptions =
 {
+  "ec2": {
+    "ec2-instance-with-user-data-secrets": [
+      "ec2.regions.us-east-1.vpcs.vpc-9f5eb5fb.instances.i-09a8ff92deb793fa8.potential_secrets"
+    ]
+  },
   "elb": {
         "elb-listener-allowing-cleartext": [
             "elb.regions.us-east-1.vpcs.vpc-c51788a1.elbs.e5eb87a04a9a1225188f56939a73d2e78232e8db.listeners.80",
