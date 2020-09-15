@@ -1,0 +1,45 @@
+name: Deploy ScoutSuite Docker Image to ECR
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build_and_push:
+    name: Build and Push Docker Images to ECR
+    runs-on: ubuntu-16.04
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: ECR login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Fetch Ghub Info for Docker Tag
+        uses: FranzDiebold/github-env-vars-action@v1.2.0
+        # sets $GITHUB_REPOSITORY_OWNER_SLUG /
+        #      $GITHUB_REPOSITORY_NAME_SLUG /
+        #      $GITHUB_SHA_SHORT
+
+      - name: Build, tag, and push ScoutSuite image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker build -t $GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG .
+          docker tag $GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG $ECR_REGISTRY/$GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG:$GITHUB_SHA_SHORT
+          docker tag $GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG $ECR_REGISTRY/$GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG:latest
+          docker push $ECR_REGISTRY/$GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG:$GITHUB_SHA_SHORT
+          docker push $ECR_REGISTRY/$GITHUB_REPOSITORY_OWNER_SLUG/$GITHUB_REPOSITORY_NAME_SLUG:latest
+
