@@ -1,0 +1,11 @@
+version: "1"
+rules:
+  - base: master
+    upstream: nccgroup:master
+    mergeMethod: merge
+    mergeUnstable: false
+    reviewers:
+      - "ifit/devops-squad-reviewers"
+    conflictReviewers:
+      - "ifit/devops-squad-reviewers"
+label: ":robot: :arrow_heading_down: pull"
