@@ -1,4 +1,4 @@
-# virtualenv 
+# virtualenv
 env/
 venv/
 
@@ -68,3 +68,6 @@ report-*
 # Private folders
 /private*/
 /**/private*/
+
+# iFit local exec reports
+results/
